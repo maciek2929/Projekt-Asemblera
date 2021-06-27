@@ -1,0 +1,61 @@
+<div class="header">
+  Symulator procesora
+</div>
+<form class="form-container">
+  <div class="invalid-text" *ngIf="axInput.invalid && (axInput.dirty || axInput.touched)"> Tylko format HEX</div>
+  <label for="ax">AX: </label>
+  <input [pattern]="hexPattern" type="text" name="ax" [(ngModel)]="myData.ax" #axInput="ngModel">
+
+  <label for="bx">BX: </label>
+  <input type="text" name="bx" [(ngModel)]="myData.bx">
+
+  <label for="cx">CX: </label>
+  <input type="text" name="cx" [(ngModel)]="myData.cx">
+
+  <label for="dx">DX: </label>
+  <input type="text" name="dx" [(ngModel)]="myData.dx">
+
+  <button (click)="onClear()">CLEAR</button>
+
+  <div>
+    <p>KOMENDY: </p>
+    <!-- move -->
+    <div class="command-container">
+      <label for="moveFrom">MOVE FROM: </label>
+      <select name="moveFrom" #moveFrom>
+        <option [value]="myData.ax">ax</option>
+        <option [value]="myData.bx">bx</option>
+        <option [value]="myData.cx">cx</option>
+        <option [value]="myData.dx">dx</option>
+
+      </select>
+      <label for="moveTo">TO: </label>
+      <select name="moveTo" #moveTo>
+        <option value="ax">AX</option>
+        <option value="bx">BX</option>
+        <option value="cx">CX</option>
+        <option value="dx">DX</option>
+      </select>
+      <button (click)="onMove(moveFrom.value, moveTo.value)">MOVE</button>
+    </div>
+    <!-- exchange -->
+    <div class="command-container">
+      <label for="xchg1">XCHG: </label>
+      <select name="xchg1" #xchg1>
+        <option [value]="myData.ax">ax</option>
+        <option [value]="myData.bx">bx</option>
+        <option [value]="myData.cx">cx</option>
+        <option [value]="myData.dx">dx</option>
+
+      </select>
+      <label for="xchg2">WITH: </label>
+      <select name="xchg2" #xchg2>
+        <option [value]="myData.ax">ax</option>
+        <option [value]="myData.bx">bx</option>
+        <option [value]="myData.cx">cx</option>
+        <option [value]="myData.dx">dx</option>
+      </select>
+      <button (click)="onXchg(xchg1, xchg2)">XCHG</button>
+    </div>
+  </div>
+</form>
